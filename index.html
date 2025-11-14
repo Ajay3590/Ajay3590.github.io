@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajaypal Kulhari - Portfolio</title>
+    <style>
+        /* --- Basic Setup --- */
+        :root {
+            --bg-color: #121212;
+            --surface-color: #1e1e1e;
+            --primary-color: #00bfa5; /* A nice tech-y teal */
+            --text-color: #e0e0e0;
+            --text-secondary: #a0a0a0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 5rem 0;
+            border-bottom: 1px solid var(--surface-color);
+        }
+
+        h1, h2, h3 {
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+        
+        h1 { font-size: 3rem; }
+        h2 { font-size: 2.2rem; border-bottom: 3px solid var(--primary-color); display: inline-block; padding-bottom: 5px; }
+        p { margin-bottom: 1rem; color: var(--text-secondary); }
+        a { color: var(--primary-color); text-decoration: none; }
+        ul { list-style-position: inside; padding-left: 5px; }
+        li { margin-bottom: 0.5rem; color: var(--text-secondary); }
+
+        /* --- Header & Navigation --- */
+        .navbar {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            background-color: var(--surface-color);
+            padding: 1rem 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .navbar .nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        .navbar .nav-links li {
+            margin-left: 1.5rem;
+        }
+
+        .navbar .nav-links a {
+            color: var(--text-color);
+            transition: color 0.3s ease;
+        }
+
+        .navbar .nav-links a:hover,
+        .navbar .nav-links a.active {
+            color: var(--primary-color);
+        }
+
+        /* --- Hero Section --- */
+        #home {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding-top: 60px; /* Offset for fixed navbar */
+        }
+
+        #home .subtitle {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--primary-color);
+            color: #121212;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+        }
+
+        /* --- Skills Section --- */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .skill-card {
+            background: var(--surface-color);
+            padding: 2rem;
+            text-align: center;
+            border-radius: 8px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 191, 165, 0.2);
+        }
+
+        .skill-card h3 {
+            font-size: 1.2rem;
+            color: var(--text-color);
+        }
+
+        /* --- Experience Section --- */
+        .experience-item {
+            background: var(--surface-color);
+            padding: 2rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+        .experience-item h3 {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 0.25rem;
+        }
+        .experience-item .date {
+            color: var(--primary-color);
+            font-weight: bold;
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+        .experience-item li {
+            font-size: 1rem;
+        }
+
+        /* --- Projects Section --- */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            background: var(--surface-color);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-card .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-links a {
+            margin-right: 1rem;
+            font-weight: bold;
+        }
+
+        /* --- Competitive Programming Section --- */
+        .cp-profiles {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .cp-profile {
+            background: var(--surface-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+        }
+        
+        .cp-profile h3 {
+            color: var(--primary-color);
+        }
+
+        /* --- Contact Section --- */
+        #contact {
+            text-align: center;
+        }
+        
+        #contact .email-link {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        #contact .email-link:hover {
+            color: white;
+        }
+
+        .social-links {
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            font-size: 1.2rem;
+            margin: 0 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: white;
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            background: var(--surface-color);
+            margin-top: 3rem;
+        }
+
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container">
+            <a href="#home" class="logo">Ajaypal Kulhari</a>
+            <ul class="nav-links">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#cp" class="nav-link">CP</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+
+        <section id="home" class="container">
+            <h1>Hi, I'm Ajaypal Kulhari</h1>
+            <p class="subtitle">B.Tech Student at IIT Delhi | Codeforces Expert | Software Developer</p>
+            <a href="#projects" class="cta-button">View My Work</a>
+        </section>
+
+        <section id="skills" class="container">
+            <h2>My Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-card"><h3>C++</h3></div>
+                <div class="skill-card"><h3>C</h3></div>
+                <div class="skill-card"><h3>Python</h3></div>
+                <div class="skill-card"><h3>Kotlin</h3></div>
+                <div class="skill-card"><h3>Java</h3></div>
+                <div class="skill-card"><h3>SQL</h3></div>
+                <div class="skill-card"><h3>Data Structures & Algos</h3></div>
+                <div class="skill-card"><h3>Spring Boot</h3></div>
+                <div class="skill-card"><h3>GCP</h3></div>
+                <div class="skill-card"><h3>ArgoCD</h3></div>
+                <div class="skill-card"><h3>Git & GitHub</h3></div>
+                <div class="skill-card"><h3>CI/CD</h3></div>
+            </div>
+        </section>
+
+        <section id="experience" class="container">
+            <h2>Experience</h2>
+            <div class="experience-item">
+                <h3>Intern Analyst - Deutsche India Pvt. Ltd, Pune</h3>
+                <p class="date">(May 2025 – July 2025)</p>
+                <ul>
+                    <li>Developed backend microservices in Kotlin and Spring Boot to streamline client onboarding and regulatory compliance.</li>
+                    <li>Built REST endpoints and integrated a custom Validator Framework to ensure regulatory adherence for submitted documents.</li>
+                    <li>Implemented OCR-based document processing within the Data Point Collection Service to extract and manage client data.</li>
+                    <li>Automated deployment on GCP using ArgoCD, Helm Charts, and CI/CD pipelines, ensuring continuous updates.</li>
+                    <li><b>Awarded a Pre-Placement Offer (PPO)</b> at the end of the internship for outstanding performance and technical contributions.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="cp" class="container">
+            <h2>Competitive Programming</h2>
+            <p>I actively solve challenging problems on various online judges. My primary language is C++.</p>
+            <div class="cp-profiles">
+                <div class="cp-profile">
+                    <h3>Codeforces</h3>
+                    <p>Expert Rank (Top 1% in India)</p>
+                    <a href="https://codeforces.com/profile/Bitbender0" target="_blank" class="cta-button">View Profile (@Bitbender0)</a>
+                </div>
+                <div class="cp-profile">
+                    <h3>LeetCode</h3>
+                    <p>Active Problem Solver</p>
+                    <a href="https://leetcode.com/u/ajayyyyyyyy/" target="_blank" class="cta-button">View Profile (@ajayyyyyyyy)</a>
+                </div>
+                <div class="cp-profile">
+                    <h3>CodeChef</h3>
+                    <p>Active Problem Solver</p>
+                    <a href="https://www.codechef.com/users/ajaykulhari586" target="_blank" class="cta-button">View Profile (@ajaykulhari586)</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="container">
+            <h2>Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3>Generative AI Q&A Engine</h3>
+                        <p>Designed a document search-engine to retrieve the top-k most relevant paragraphs for a query. Leveraged an OpenAI API to fetch accurate answers in context to the given top-ranked paragraph groups.</p>
+                        <div class="project-links">
+                            <a href="https://github.com/Ajay3590" target="_blank">Code</a>
+                            <a href="[Live Demo URL]" target="_blank">Live Demo</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3>Multithreaded Client-Server Application</h3>
+                        <p>Built a scalable multithreaded TCP server in C/C++ using POSIX threads to support 100+ clients for large file transfers. Integrated collision-avoidance mechanisms (Slotted Aloha) and server-side scheduling policies (FIFO, Round Robin).</p>
+                        <div class="project-links">
+                            <a href="https://github.com/Ajay3590" target="_blank">Code</a>
+                            <a href="[Live Demo URL]" target="_blank">Live Demo</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3>Predicting Customer Response</h3>
+                        <p>Developed a Decision Tree using Entropy and Gini Index for response prediction. Applied Cost Complexity Pruning to eliminate overfitting and implemented Bagging and AdaBoost to enhance model accuracy.</p>
+                        <div class="project-links">
+                            <a href="https://github.com/Ajay3590" target="_blank">Code</a>
+                            <a href="[Live Demo URL]" target="_blank">Live Demo</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="container">
+            <h2>Get In Touch</h2>
+            <p>I'm currently open to new opportunities. Feel free to reach out!</p>
+            <a href="mailto:ajaykulhari586@gmail.com" class="email-link">ajaykulhari586@gmail.com</a>
+            
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/ajay-kulhari-iitd" target="_blank">LinkedIn</a>
+                <a href="https://github.com/Ajay3590" target="_blank">GitHub</a>
+                <a href="https://codeforces.com/profile/Bitbender0" target="_blank">Codeforces</a>
+                <a href="https://leetcode.com/u/ajayyyyyyyy/" target="_blank">LeetCode</a>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Ajaypal Kulhari. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.5 
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    
+                    const id = entry.target.getAttribute('id');
+                    const activeLink = document.querySelector(`.nav-link[href="#${id}"]`);
+                    if (activeLink) {
+                        activeLink.classList.add('active');
+                    }
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+
+</body>
+</html>
